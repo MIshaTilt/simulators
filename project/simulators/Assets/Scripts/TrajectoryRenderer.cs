@@ -53,9 +53,10 @@ public class TraectoryRenderer : MonoBehaviour
         DrawVacuum(startPosition, startVelocity);
     }
 
-    public void DrawWithAirEuler(Vector3 startPosition, Vector3 startVelocity)
+    public void DrawWithAirEuler(float mass, float radius, Vector3 startPosition, Vector3 startVelocity)
     {
-        _area = Mathf.PI * _radius * _radius;
+        _area = Mathf.PI * radius * radius;
+        
         Vector3 p = startPosition;
         Vector3 v = startVelocity;
         _lineRenderer.positionCount = _pointCount;
@@ -67,22 +68,10 @@ public class TraectoryRenderer : MonoBehaviour
             Vector3 vRel = v - _wind;
             float speed = vRel.magnitude;
             Vector3 drag = speed > 1e-6f ? (-0.5f * _airDensity * _dragCoefficient * _area * speed) * vRel : Vector3.zero;
-            Vector3 a = Physics.gravity + drag / _mass;
+            Vector3 a = Physics.gravity + drag / mass;
 
             v += a * _timeStep;
             p += v * _timeStep;
         }
-    }
-
-    // Новый метод: DrawWithAirEuler с параметрами массы и радиуса
-    public void DrawWithAirEuler(Vector3 startPosition, Vector3 startVelocity, float mass, float radius, float dragCoefficient, float airDensity, Vector3 wind)
-    {
-        _mass = mass;
-        _radius = radius;
-        _dragCoefficient = dragCoefficient;
-        _airDensity = airDensity;
-        _wind = wind;
-        _area = Mathf.PI * _radius * _radius;
-        DrawWithAirEuler(startPosition, startVelocity);
     }
 }

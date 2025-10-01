@@ -26,6 +26,8 @@ namespace forces
         [SerializeField] private float _radiusMax = 0.2f;
 
         private TraectoryRenderer _traectoryRenderer;
+        private Vector3 v0;
+
 
         // Текущие случайные параметры
         private float _currentMass;
@@ -35,25 +37,18 @@ namespace forces
         {
             _traectoryRenderer = GetComponent<TraectoryRenderer>();
             GenerateRandomParams();
+
         }
 
         private void Update()
         {
-            // Применяем к превью
-            Vector3 v0 = CalculateVelocityVector(_muzzleAngle);
-            if (air)
-            {
-                _traectoryRenderer.DrawWithAirEuler(_launchPoint.position, v0, _currentMass, _currentRadius, _dragCoefficient, _airDensity, _wind);
-            }
-            else
-            {
-                _traectoryRenderer.DrawVacuum(_launchPoint.position, v0, _currentMass, _currentRadius);
-            }
+            _traectoryRenderer.DrawWithAirEuler(_currentMass, _currentRadius, _launchPoint.position, v0);
 
+            v0 = CalculateVelocityVector(_muzzleAngle);
             if (Keyboard.current.spaceKey.wasPressedThisFrame)
             {
-                Fire(v0, _currentMass, _currentRadius);
-                GenerateRandomParams(); // Новые параметры после выстрела
+                Fire();
+                GenerateRandomParams();
             }
         }
 
@@ -62,14 +57,16 @@ namespace forces
             _currentMass = Random.Range(_massMin, _massMax);
             _currentRadius = Random.Range(_radiusMin, _radiusMax);
         }
-
-        private void Fire(Vector3 initialVelocity, float mass, float radius)
+        
+        private void Fire()
         {
-            if(_shootRound == null) return;
+            if (_shootRound == null) return;
             GameObject newShootRound = Instantiate(_shootRound.gameObject, _launchPoint.position, Quaternion.identity);
-
             QuadraticDrag quadraticDrag = newShootRound.GetComponent<QuadraticDrag>();
-            quadraticDrag.SetPhysicsParams(mass, radius, _dragCoefficient, _airDensity, _wind, initialVelocity);
+
+
+
+            quadraticDrag.SetPhysicalParams(_currentMass, _currentRadius, _dragCoefficient, _airDensity, _wind, v0);
         }
 
         private Vector3 CalculateVelocityVector(float angle)
