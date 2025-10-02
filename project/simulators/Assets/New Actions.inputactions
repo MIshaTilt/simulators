@@ -1,0 +1,135 @@
+{
+    "version": 1,
+    "name": "New Actions",
+    "maps": [
+        {
+            "name": "JetEngine",
+            "id": "aee2d5be-f3f9-4fdc-8a49-d7e80880e6c8",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "446bc612-2312-4d9c-800f-3a3ab8a073b2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ThrottleUp",
+                    "type": "Button",
+                    "id": "1d4447ac-bb51-49ba-852e-665ea4a851da",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ThrottleDown",
+                    "type": "Button",
+                    "id": "bd38af76-9095-43ef-b6d0-e8a50cee0f42",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ThrottleStepUp",
+                    "type": "Button",
+                    "id": "716c0db5-364a-4775-8039-eca92c80070e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ThrottleStepDown",
+                    "type": "Button",
+                    "id": "5458ef40-63cf-4651-9d92-8fb3eb279188",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "toggleAB",
+                    "type": "Button",
+                    "id": "cb63e044-cdf2-4cd4-89fa-e2b91d9b62ad",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "09363c16-0518-41d2-aec6-532fef32a1aa",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5f30f293-db4f-4af4-bdb7-9a7faa979e06",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThrottleUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "be1b3541-c806-49bc-8d77-7cf7e7222b5c",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThrottleDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "28091220-75c8-49f0-9e5a-0bb1280c969e",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThrottleStepUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "247567c1-f46a-45e1-a833-6bcea3a906b6",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThrottleStepDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "51f7b309-198a-4b25-82be-db2d942a2a7a",
+                    "path": "<Keyboard>/alt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "toggleAB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
