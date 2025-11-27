@@ -555,6 +555,7 @@ GameObject:
   - component: {fileID: 989941783}
   - component: {fileID: 989941782}
   - component: {fileID: 989941781}
+  - component: {fileID: 989941787}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -580,8 +581,10 @@ MonoBehaviour:
   _rearRightWheel: {fileID: 1617561447}
   _playerInput: {fileID: -944628639613478452, guid: 51a4581e69692424f96631bcb832ae6d, type: 3}
   _frontAxisShare: 0.5
-  engineTorque: 400
-  wheelRadius: 0.3
+  _engine: {fileID: 989941787}
+  _gearRatio: 8
+  _drivetrainEfficiency: 0.9
+  _wheelRadius: 0.3
   maxSpeed: 20
   maxSteeringAngle: 30
   frictionCoefficient: 1
@@ -595,7 +598,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 989941780}
   serializedVersion: 4
-  m_Mass: 20
+  m_Mass: 2000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -707,6 +710,49 @@ Transform:
   - {fileID: 1560562950}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &989941787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989941780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60f7212ab4221cd4d9577b8354bf68cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _idleRpm: 1000
+  _maxRpm: 8000
+  _revLimiterRpm: 7500
+  _torqueCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1000
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 8000
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _flywheelInertia: 0.2
+  _throttleResponse: 5
+  _engineFrictionCoeff: 0.02
+  _loadTorqueCoeff: 5
 --- !u!1 &1078962226
 GameObject:
   m_ObjectHideFlags: 0

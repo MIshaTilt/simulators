@@ -14,9 +14,14 @@ public class KartController : MonoBehaviour
     [SerializeField] private InputActionAsset _playerInput;
 
     [SerializeField, Range(0, 1)] private float _frontAxisShare = 0.5f;
+    [Header("Engine & drivetrain")]
+    [SerializeField] private KartEngine _engine;
+    [SerializeField] private float _gearRatio = 8f;
+    [SerializeField] private float _drivetrainEfficiency = 0.9f;
+    [SerializeField] private float _wheelRadius = 0.3f;
     private InputAction _moveAction;
 
-    private float _throttleinput;
+    private float _throttleInput;
     private float _steepInput;
 
     private float _frontLeftNormalForce, _frontRightNormalForce, _rearLeftNormalForce, _rearRightNormalForce;
@@ -25,8 +30,6 @@ public class KartController : MonoBehaviour
 
     private Vector3 g = Physics.gravity;
 
-    [SerializeField] private float engineTorque = 400f; // N*m
-    [SerializeField] private float wheelRadius = 0.3f;
     [SerializeField] private float maxSpeed = 20;
 
     [SerializeField] private float maxSteeringAngle;
@@ -76,7 +79,7 @@ public class KartController : MonoBehaviour
     {
         Vector2 move = _moveAction.ReadValue<Vector2>();
         _steepInput = Mathf.Clamp(move.x, -1, 1);
-        _throttleinput = Mathf.Clamp(move.y, -1, 1);
+        _throttleInput = Mathf.Clamp(move.y, -1, 1);
 
     }
 
@@ -98,17 +101,17 @@ public class KartController : MonoBehaviour
         Vector3 forward = transform.forward;
         float speedAlongForward = Vector3.Dot(_rigidbody.linearVelocity, forward);
 
-        if (_throttleinput > 0 && speedAlongForward > maxSpeed) return;
+        if (_throttleInput > 0 && speedAlongForward > maxSpeed) return;
 
-        float driveTorque = engineTorque * _throttleinput;
+        float driveTorque = _engine.Simulate(_throttleInput, speedAlongForward, Time.fixedDeltaTime);
 
-        float driveForcePerWheel = driveTorque / wheelRadius / 2;
+        float driveForcePerWheel = driveTorque / _wheelRadius / 2;
 
         Vector3 forceRearLeft = forward * driveForcePerWheel;
-        Vector3 forceRearRight = forceRearLeft;
+        Vector3 forceRearRight = forceRearLeft * driveForcePerWheel;
 
         _rigidbody.AddForceAtPosition(forceRearLeft, _rearLeftWheel.position, ForceMode.Force);
-        _rigidbody.AddForceAtPosition(forceRearRight, _rearRightWheel.position, ForceMode.Force);
+       _rigidbody.AddForceAtPosition(forceRearRight, _rearRightWheel.position, ForceMode.Force);
 
     }
 
@@ -140,12 +143,15 @@ public class KartController : MonoBehaviour
         {
             Vector3 bodyForward = transform.forward;
             float speedAlongForward = Vector3.Dot(_rigidbody.linearVelocity, bodyForward);
-            if (!(_throttleinput > 0) && speedAlongForward > maxSpeed)
+
+            if (!(_throttleInput > 0) && speedAlongForward > maxSpeed)
             {
-                float driveTorque = engineTorque * _throttleinput;
-                float driveForce = driveTorque / wheelRadius;
-                Fx += driveForce;
+                float engineTorque = _engine.Simulate(_throttleInput, speedAlongForward, Time.fixedDeltaTime);
+                float totalWheelTorque = engineTorque * _gearRatio * _drivetrainEfficiency;
+                float wheelTorque = totalWheelTorque * 0.5f;
+                Fx += wheelTorque / _wheelRadius;
             }
+
 
             float rooling = -rollingResistance * vlong;
             Fy += rooling;
