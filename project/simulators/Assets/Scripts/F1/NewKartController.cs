@@ -16,6 +16,7 @@ public class NewKartController : MonoBehaviour
     [Header("Engine Link")]
     [SerializeField] private KartEngine _engine;
     [SerializeField] private KartAero _aero;
+    [SerializeField] private CarSuspension _suspension;
 
     [Header("Input")]
     [SerializeField] private InputActionAsset _playerInput;
@@ -243,7 +244,7 @@ public class NewKartController : MonoBehaviour
         if (!_guiInit) InitGui();
 
         // Рисуем фон
-        Rect panelRect = new Rect(20, 20, 260, 500);
+        Rect panelRect = new Rect(20, 20, 260, 850);
         GUI.DrawTexture(panelRect, _bgTexture);
 
         GUILayout.BeginArea(new Rect(panelRect.x + 10, panelRect.y + 10, panelRect.width - 20, panelRect.height - 20));
@@ -271,12 +272,38 @@ public class NewKartController : MonoBehaviour
         DrawSlipRow("Front (L | R)", _telemetryFLSlip, _telemetryFRSlip);
         DrawSlipRow("Rear (L | R)",  _telemetryRLSlip, _telemetryRRSlip);
 
-        DrawDataRow("Drag Force", $"{_aero.CurrentDrag:F0} N");
-        DrawDataRow("Downforce", $"{_aero.CurrentDownforce:F0} N");
-        DrawDataRow("Wing Angle", $"{_aero.CurrentWingAngle:F1}°");
-        
-        Color drsColor = _aero.IsDRSOpen ? Color.green : Color.gray;
-        DrawDataRow("DRS Status", _aero.IsDRSOpen ? "OPEN" : "CLOSED", drsColor);
+        GUILayout.Label("2. AERODYNAMICS", _sectionStyle);
+        if (_aero)
+        {
+            DrawDataRow("Drag Force", $"{_aero.CurrentDrag:F0} N");
+            DrawDataRow("Downforce", $"{_aero.CurrentDownforce:F0} N");
+            DrawDataRow("Wing Angle", $"{_aero.CurrentWingAngle:F1}°");
+            
+            Color drsColor = _aero.IsDRSOpen ? Color.green : Color.gray;
+            DrawDataRow("DRS Status", _aero.IsDRSOpen ? "OPEN" : "CLOSED", drsColor);
+        }
+        else GUILayout.Label("No KartAero script!");
+
+        // --- 4. ПОДВЕСКА (СИЛЫ) ---
+        GUILayout.Label("3. SUSPENSION FORCES (N)", _sectionStyle);
+        if (_suspension)
+        {
+            DrawDataRow("FL Force", $"{_suspension.ForceFL:F0}");
+            DrawDataRow("FR Force", $"{_suspension.ForceFR:F0}");
+            DrawDataRow("RL Force", $"{_suspension.ForceRL:F0}");
+            DrawDataRow("RR Force", $"{_suspension.ForceRR:F0}");
+
+            // --- 5. ДИСТАНЦИЯ ДО ЗЕМЛИ (Ground Clearance) ---
+            GUILayout.Label("4. GROUND CLEARANCE (m)", _sectionStyle);
+            DrawDataRow("FL Dist", $"{_suspension.HitDistFL:F3}");
+            DrawDataRow("FR Dist", $"{_suspension.HitDistFR:F3}");
+
+            // --- 6. СЖАТИЕ ПРУЖИН ---
+            GUILayout.Label("5. COMPRESSION (m)", _sectionStyle);
+            DrawDataRow("FL Comp", $"{_suspension.CompressionFL:F3}");
+            DrawDataRow("FR Comp", $"{_suspension.CompressionFR:F3}");
+        }
+        else GUILayout.Label("No CarSuspension script!");
 
         GUILayout.EndArea();
     }

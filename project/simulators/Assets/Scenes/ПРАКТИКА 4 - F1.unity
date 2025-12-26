@@ -1528,6 +1528,7 @@ MonoBehaviour:
   _rearRightWheel: {fileID: 1617561447}
   _engine: {fileID: 989941787}
   _aero: {fileID: 1047585587}
+  _suspension: {fileID: 1047585585}
   _playerInput: {fileID: -944628639613478452, guid: 51a4581e69692424f96631bcb832ae6d, type: 3}
 --- !u!114 &1047585587
 MonoBehaviour:
@@ -1544,12 +1545,12 @@ MonoBehaviour:
   rb: {fileID: 1047585582}
   inputAsset: {fileID: -944628639613478452, guid: 51a4581e69692424f96631bcb832ae6d, type: 3}
   airDensity: 1.225
-  dragCoefficient: 0.9
-  frontalArea: 0.6
+  dragCoefficient: 1.2
+  frontalArea: 1
   rearWing: {fileID: 637076424}
-  wingArea: 0.4
-  liftCoefficientSlope: 0.08
-  normalWingAngle: 20
+  wingArea: 4
+  liftCoefficientSlope: 0.15
+  normalWingAngle: 30
   drsWingAngle: 0
   groundEffectStrength: 3000
   groundRayLength: 1

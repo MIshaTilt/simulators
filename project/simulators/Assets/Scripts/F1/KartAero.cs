@@ -41,7 +41,6 @@ public class KartAero : MonoBehaviour
         if (inputAsset != null)
         {
             var map = inputAsset.FindActionMap("Kart"); 
-            // Убедитесь, что Action "DRS" создан в Input Actions
             _drsAction = map.FindAction("DRS"); 
         }
         _currentWingAngle = normalWingAngle;
@@ -52,25 +51,19 @@ public class KartAero : MonoBehaviour
 
     private void Update()
     {
-        // Логика переключения DRS
         if (_drsAction != null)
         {
-            // Режим удержания кнопки (как в примере) или переключения
             _drsActive = _drsAction.IsPressed();
         }
 
-        // Плавная смена угла крыла
         float targetAngle = _drsActive ? drsWingAngle : normalWingAngle;
         _currentWingAngle = Mathf.MoveTowards(_currentWingAngle, targetAngle, Time.deltaTime * 100f);
         
-        // Визуализация (опционально)
         if (rearWing)
         {
-             // Предполагаем, что крыло вращается по оси X
              Vector3 localRot = rearWing.localEulerAngles;
              localRot.x = _currentWingAngle; 
-             // Внимание: углы Эйлера могут быть капризными, для простоты примера:
-             // Лучше использовать rearWing.localRotation = Quaternion.Euler(...)
+
         }
     }
 
@@ -118,7 +111,7 @@ public class KartAero : MonoBehaviour
         float downforce = 0.5f * airDensity * Cl * wingArea * speed * speed;
         CurrentDownforce = downforce;
 
-        Vector3 forceVec = -transform.up * downforce; // Давим вниз относительно авто
+        Vector3 forceVec = -transform.up * downforce;
         rb.AddForceAtPosition(forceVec, rearWing.position, ForceMode.Force);
     }
 
@@ -128,7 +121,7 @@ public class KartAero : MonoBehaviour
         if (Physics.Raycast(transform.position, -transform.up, out hit, groundRayLength))
         {
             float h = hit.distance;
-            if (h < 0.05f) h = 0.05f; // Защита от деления на ноль
+            if (h < 0.05f) h = 0.05f;
 
             // F_ge = C_ge / h
             float geForce = groundEffectStrength / h;
