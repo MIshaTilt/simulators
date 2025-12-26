@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::KartConfig
   mass: 300
   frictionCoefficient: 1
-  frontLateralStiffness: 80
-  rearLateralStiffness: 80
+  frontLateralStiffness: 5000
+  rearLateralStiffness: 5000
   rollingResistance: 15
   maxSteerAngle: 30
   engineTorqueCurve:
