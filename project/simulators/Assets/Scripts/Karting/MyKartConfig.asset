@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2403ef98c4e8ccc45bafca58531d85a0, type: 3}
   m_Name: MyKartConfig
   m_EditorClassIdentifier: Assembly-CSharp::KartConfig
-  mass: 300
+  mass: 600
   frictionCoefficient: 1
   frontLateralStiffness: 5000
   rearLateralStiffness: 5000

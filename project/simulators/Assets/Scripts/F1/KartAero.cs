@@ -121,7 +121,7 @@ public class KartAero : MonoBehaviour
         if (Physics.Raycast(transform.position, -transform.up, out hit, groundRayLength))
         {
             float h = hit.distance;
-            if (h < 0.05f) h = 0.05f;
+            if (h < 2f) h = 2f;
 
             // F_ge = C_ge / h
             float geForce = groundEffectStrength / h;
