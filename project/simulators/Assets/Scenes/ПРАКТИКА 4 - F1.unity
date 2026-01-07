@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 119310234}
   - component: {fileID: 119310233}
   - component: {fileID: 119310232}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -841,7 +841,7 @@ GameObject:
   - component: {fileID: 577535079}
   - component: {fileID: 577535078}
   - component: {fileID: 577535077}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1090,7 +1090,7 @@ GameObject:
   - component: {fileID: 685233172}
   - component: {fileID: 685233171}
   - component: {fileID: 685233170}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1277,7 +1277,7 @@ GameObject:
   - component: {fileID: 819794248}
   - component: {fileID: 819794247}
   - component: {fileID: 819794246}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1387,7 +1387,7 @@ GameObject:
   - component: {fileID: 848172786}
   - component: {fileID: 848172785}
   - component: {fileID: 848172784}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1642,6 +1642,7 @@ GameObject:
   - component: {fileID: 1047585585}
   - component: {fileID: 1047585587}
   - component: {fileID: 1047585586}
+  - component: {fileID: 1047585588}
   m_Layer: 0
   m_Name: RealKart
   m_TagString: Untagged
@@ -1765,6 +1766,26 @@ MonoBehaviour:
   drsWingAngle: 0
   groundEffectStrength: 3000
   groundRayLength: 1
+--- !u!114 &1047585588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047585580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38585ed9b78aaf54eb47e3d57de69ecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontLeft: {fileID: 5815864}
+  frontRight: {fileID: 1927363232}
+  rearLeft: {fileID: 539195397}
+  rearRight: {fileID: 2121132279}
+  wheelRadius: 0.51
+  visualSpeedMultiplier: 1
+  spinAxis: 1
+  invertDirection: 0
 --- !u!1 &1213695007
 GameObject:
   m_ObjectHideFlags: 0
@@ -1777,7 +1798,7 @@ GameObject:
   - component: {fileID: 1213695010}
   - component: {fileID: 1213695009}
   - component: {fileID: 1213695008}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2188,7 +2209,7 @@ GameObject:
   - component: {fileID: 1722207575}
   - component: {fileID: 1722207574}
   - component: {fileID: 1722207573}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2811,7 +2832,7 @@ GameObject:
   - component: {fileID: 1910783568}
   - component: {fileID: 1910783567}
   - component: {fileID: 1910783566}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
